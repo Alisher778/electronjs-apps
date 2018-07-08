@@ -1,9 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Electron App</title>
-</head>
-<body>
-  Hello Guys
-</body>
+    <head>
+        <title>Electron App</title>
+    </head>
+    <body>
+        <h1>Hello My App</h1>
+        <form action="">
+            <div>
+                <label for="">Choose A Video</label>
+                <input type="file" accept="video/*">
+            </div>
+            <button>Get Info</button>
+        </form>
+
+        <script>
+            const form = document.querySelector('form').addEventListener('submit', function(e){
+                e.preventDefault();
+                const file = document.querySelector('input').files[0];
+                console.log(file)
+
+            })
+        </script>
+    </body>
 </html>
