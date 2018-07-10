@@ -5,6 +5,7 @@
     </head>
     <body>
         <h1>Hello My App</h1>
+        <h2 id="duration"></h2>
         <form action="">
             <div>
                 <label for="">Choose A Video</label>
@@ -14,12 +15,20 @@
         </form>
 
         <script>
+            const electron = require('electron');
+            const { ipcRenderer } = electron;
+
             const form = document.querySelector('form').addEventListener('submit', function(e){
                 e.preventDefault();
-                const file = document.querySelector('input').files[0];
-                console.log(file)
+                const { path } = document.querySelector('input').files[0];
 
-            })
+                ipcRenderer.send('videoSubmited', path);
+            });
+
+            ipcRenderer.on('videoMetadata', (event, duration) => {
+              const h1 = document.querySelector('#duration');
+              h1.innerHTML = `Video duration is ${duration} seconds`
+            });
         </script>
     </body>
 </html>
